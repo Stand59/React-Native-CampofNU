@@ -17,7 +17,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     postFavorite: campsiteId => (postFavorite(campsiteId)),
-    postComment: campsiteId => (postComment(campsiteId, rating, author, text))
+    postComment: (campsiteId, rating, author, text) => (postComment(campsiteId, rating, author, text))
 };
 
 function RenderCampsite(props) {
@@ -104,7 +104,7 @@ class CampsiteInfo extends Component {
     }
 
     handleComment(campsiteId) {
-        postComment(campsiteId, this.state.rating, this.state.author, this.state.text),
+        this.props.postComment(campsiteId, this.state.rating, this.state.author, this.state.text),
         this.toggleModal();
     }
 
@@ -170,7 +170,7 @@ class CampsiteInfo extends Component {
                             <Button
                                 title='Submit'
                                 color='#5637DD'
-                                onPres={() =>{
+                                onPress={() =>{
                                     this.handleComment(campsiteId);
                                     this.resetForm();
                                 }}
